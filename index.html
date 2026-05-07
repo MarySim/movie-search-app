@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой кинозал</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- СТРАНИЦА ПРИВЕТСТВИЯ -->
+    <div id="welcome-page">
+        <div class="welcome-container">
+            <h1>🎬 Мой кинозал</h1>
+            <p>Введите ваше имя, чтобы продолжить:</p>
+            <input type="text" id="username-input" placeholder="Ваше имя">
+            <p class="error-message" id="welcome-error"></p>
+            <button id="welcome-button">Далее</button>
+        </div>
+    </div>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА (изначально скрыта) -->
+    <div id="main-page" class="hidden">
+        <!-- Шапка -->
+        <header>
+            <h1>🎬 Мой кинозал</h1>
+            <span id="greeting">Привет, Гость!</span>
+        </header>
+
+        <!-- Панель управления -->
+        <div class="controls">
+            <div class="search-group">
+                <input type="text" id="search-input" placeholder="Введите название фильма...">
+                <button id="search-button">Найти</button>
+            </div>
+            
+            <div class="filter-group">
+                <select id="type-select">
+                    <option value="">Все</option>
+                    <option value="movie">Фильмы</option>
+                    <option value="series">Сериалы</option>
+                </select>
+                
+                <button class="sort-button" data-sort="year-desc">По году ▼</button>
+                <button class="sort-button" data-sort="year-asc">По году ▲</button>
+                <button class="sort-button" data-sort="title">По названию</button>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="poster-filter">
+                    Только с постерами
+                </label>
+                
+                <button id="stats-button">Статистика</button>
+            </div>
+        </div>
+
+        <!-- Сообщения (ошибки, загрузка, пустой результат) -->
+        <div id="message-container"></div>
+
+        <!-- Контейнер с фильмами -->
+        <div id="movies-container"></div>
+
+        <!-- Блок статистики (изначально скрыт) -->
+        <div id="stats-container" class="hidden">
+            <h2>Статистика</h2>
+            <div id="stats-content"></div>
+        </div>
+
+        <!-- Модальное окно -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <footer>
+            <p>Данные предоставлены OMDb API</p>
+        </footer>
+    </div>
+
+    <!-- Скрипты -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
