@@ -1,86 +1,127 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой кинозал</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мой кинозал</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <section id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-card">
+      <p class="eyebrow">Каталог фильмов и сериалов</p>
+      <h1>Мой кинозал</h1>
+      <p class="welcome-text">
+        Введите имя, чтобы открыть личный каталог с поиском, фильтрами и избранным.
+      </p>
 
-    <!-- СТРАНИЦА ПРИВЕТСТВИЯ -->
-    <div id="welcome-page">
-        <div class="welcome-container">
-            <h1>🎬 Мой кинозал</h1>
-            <p>Введите ваше имя, чтобы продолжить:</p>
-            <input type="text" id="username-input" placeholder="Ваше имя">
-            <p class="error-message" id="welcome-error"></p>
-            <button id="welcome-button">Далее</button>
-        </div>
+      <form id="welcomeForm" class="welcome-form">
+        <label for="userName">Ваше имя</label>
+        <input id="userName" type="text" placeholder="Например, Алексей" autocomplete="name" required />
+        <button type="submit">Далее</button>
+      </form>
     </div>
+  </section>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА (изначально скрыта) -->
-    <div id="main-page" class="hidden">
-        <!-- Шапка -->
-        <header>
-            <h1>🎬 Мой кинозал</h1>
-            <span id="greeting">Привет, Гость!</span>
-        </header>
+  <main id="appScreen" class="app hidden">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Онлайн-каталог</p>
+        <h1 id="greeting">Добро пожаловать в кинотеатр!</h1>
+        <p id="headerHint" class="header-hint">Ищите фильмы и сериалы по базе OMDb.</p>
+      </div>
 
-        <!-- Панель управления -->
-        <div class="controls">
-            <div class="search-group">
-                <input type="text" id="search-input" placeholder="Введите название фильма...">
-                <button id="search-button">Найти</button>
-            </div>
-            
-            <div class="filter-group">
-                <select id="type-select">
-                    <option value="">Все</option>
-                    <option value="movie">Фильмы</option>
-                    <option value="series">Сериалы</option>
-                </select>
-                
-                <button class="sort-button" data-sort="year-desc">По году ▼</button>
-                <button class="sort-button" data-sort="year-asc">По году ▲</button>
-                <button class="sort-button" data-sort="title">По названию</button>
-                
-                <label class="checkbox-label">
-                    <input type="checkbox" id="poster-filter">
-                    Только с постерами
-                </label>
-                
-                <button id="stats-button">Статистика</button>
-            </div>
+      <div class="header-actions">
+        <button id="changeUserBtn" class="ghost-btn" type="button">Сменить имя</button>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <form id="searchForm" class="search-form">
+        <div class="field field-search">
+          <label for="searchInput">Поиск</label>
+          <input id="searchInput" type="search" placeholder="Например: Batman, Avatar, House" />
         </div>
 
-        <!-- Сообщения (ошибки, загрузка, пустой результат) -->
-        <div id="message-container"></div>
-
-        <!-- Контейнер с фильмами -->
-        <div id="movies-container"></div>
-
-        <!-- Блок статистики (изначально скрыт) -->
-        <div id="stats-container" class="hidden">
-            <h2>Статистика</h2>
-            <div id="stats-content"></div>
+        <div class="field">
+          <label for="typeSelect">Тип</label>
+          <select id="typeSelect">
+            <option value="">Все</option>
+            <option value="movie">Фильмы</option>
+            <option value="series">Сериалы</option>
+          </select>
         </div>
 
-        <!-- Модальное окно -->
-        <div id="modal" class="modal hidden">
-            <div class="modal-content">
-                <span class="modal-close">&times;</span>
-                <div id="modal-body"></div>
-            </div>
+        <button type="submit" class="primary-btn">Найти</button>
+      </form>
+
+      <div class="control-grid">
+        <div class="field">
+          <label for="genreSelect">Жанр</label>
+          <select id="genreSelect">
+            <option value="">Все жанры</option>
+          </select>
         </div>
 
-        <!-- Футер -->
-        <footer>
-            <p>Данные предоставлены OMDb API</p>
-        </footer>
+        <div class="field">
+          <label for="sortSelect">Сортировка</label>
+          <select id="sortSelect">
+            <option value="default">Без сортировки</option>
+            <option value="rating-desc">Рейтинг: высокий → низкий</option>
+            <option value="rating-asc">Рейтинг: низкий → высокий</option>
+            <option value="date-desc">Дата выхода: новые → старые</option>
+            <option value="date-asc">Дата выхода: старые → новые</option>
+            <option value="title-asc">Название: А → Я</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="viewSelect">Вид</label>
+          <select id="viewSelect">
+            <option value="cards">Карточки</option>
+            <option value="list">Список</option>
+          </select>
+        </div>
+
+        <div class="field favorites-switch">
+          <span>Раздел</span>
+          <button id="favoritesBtn" class="secondary-btn" type="button">Показать избранное</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" id="statsPanel">
+      <div>
+        <strong id="totalCount">0</strong>
+        <span>найдено</span>
+      </div>
+      <div>
+        <strong id="favoriteCount">0</strong>
+        <span>в избранном</span>
+      </div>
+      <div>
+        <strong id="averageRating">—</strong>
+        <span>средний рейтинг</span>
+      </div>
+    </section>
+
+    <section id="message" class="message hidden"></section>
+
+    <section id="results" class="results cards-view" aria-live="polite"></section>
+
+    <div class="load-more-wrap">
+      <button id="loadMoreBtn" class="secondary-btn hidden" type="button">Загрузить ещё</button>
     </div>
+  </main>
 
-    <!-- Скрипты -->
-    <script type="module" src="js/main.js"></script>
+  <div id="movieModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" data-action="close-modal"></div>
+    <article class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-action="close-modal" aria-label="Закрыть">×</button>
+      <div id="modalBody"></div>
+    </article>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
